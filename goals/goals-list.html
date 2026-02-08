@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Saving Goals</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage(); loadGoals();">
+
+<header class="topbar">
+  <div class="logo">Saving Goals</div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="../dashboard.html">Dashboard</a>
+    <a class="active">Saving Goals</a>
+    <a href="../reports/daily-report.html">Reports</a>
+    <a href="../notifications/reminders.html">Notifications</a>
+    <a href="../profile/view-profile.html">Profile</a>
+  </aside>
+
+  <main class="content">
+    <div class="page-header">
+      <h2>Your Goals</h2>
+      <button onclick="location.href='goal-create.html'">+ New Goal</button>
+    </div>
+
+    <div id="goalsContainer" class="cards"></div>
+  </main>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function loadGoals() {
+  const goals = JSON.parse(localStorage.getItem("goals")) || [];
+  const box = document.getElementById("goalsContainer");
+  box.innerHTML = "";
+
+  if (goals.length === 0) {
+    box.innerHTML = "<p>No goals created yet.</p>";
+    return;
+  }
+
+  goals.forEach(g => {
+    const percent = Math.min((g.saved / g.target) * 100, 100);
+
+    box.innerHTML += `
+      <div class="card">
+        <h3>${g.title}</h3>
+        <p>₹${g.saved} / ₹${g.target}</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${percent}%"></div>
+        </div>
+        <small>Status: ${g.status}</small>
+        <div class="actions">
+          <button onclick="viewGoal(${g.id})">View</button>
+          <button onclick="updateGoal(${g.id})">Update</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function viewGoal(id) {
+  sessionStorage.setItem("goalId", id);
+  location.href = "goal-details.html";
+}
+
+function updateGoal(id) {
+  sessionStorage.setItem("goalId", id);
+  location.href = "goal-update.html";
+}
+</script>
+
+</body>
+</html>
+ 

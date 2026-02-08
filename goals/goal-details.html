@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Goal Details</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage(); loadGoal();">
+
+<div class="content">
+  <h2 id="title"></h2>
+  <p id="amount"></p>
+
+  <div class="progress-bar">
+    <div id="bar" class="progress-fill"></div>
+  </div>
+
+  <p id="status"></p>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function loadGoal() {
+  const id = sessionStorage.getItem("goalId");
+  const goals = JSON.parse(localStorage.getItem("goals")) || [];
+  const g = goals.find(x => x.id == id);
+
+  const percent = Math.min((g.saved / g.target) * 100, 100);
+
+  title.innerText = g.title;
+  amount.innerText = `₹${g.saved} / ₹${g.target}`;
+  status.innerText = `Status: ${g.status}`;
+  bar.style.width = percent + "%";
+}
+</script>
+
+</body>
+</html>

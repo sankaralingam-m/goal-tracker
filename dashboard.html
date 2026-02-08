@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard | Saving Goal Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="protectPage(); loadUser();">
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="logo">Saving Goal Tracker</div>
+  <div class="user-area">
+    <span id="usernameDisplay"></span>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="goals/goals-list.html">Saving Goals</a>
+    <a href="reports/daily-report.html">Reports & Analytics</a>
+    <a href="notifications/reminders.html">Notifications</a>
+    <a href="profile/view-profile.html">Profile & Settings</a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- SUMMARY CARDS -->
+    <section class="cards">
+      <div class="card">
+        <h3>Total Goals</h3>
+        <p>5</p>
+      </div>
+      <div class="card">
+        <h3>Completed</h3>
+        <p>2</p>
+      </div>
+      <div class="card">
+        <h3>Pending</h3>
+        <p>3</p>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="progress-section">
+      <h3>Overall Saving Progress</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 60%"></div>
+      </div>
+    </section>
+
+    <!-- CAROUSEL -->
+    <section class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-item">💡 Tip: Save before you spend</div>
+        <div class="carousel-item">📊 Track progress weekly</div>
+        <div class="carousel-item">🎯 Set realistic goals</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+function loadUser() {
+  document.getElementById("usernameDisplay").innerText =
+    sessionStorage.getItem("currentUser");
+}
+
+function logout() {
+  sessionStorage.clear();
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

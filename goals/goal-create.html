@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Goal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage();">
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Create New Goal</h2>
+
+    <input id="title" placeholder="Goal Title">
+    <input id="target" type="number" placeholder="Target Amount">
+    <select id="priority">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+
+    <button onclick="createGoal()">Create Goal</button>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function createGoal() {
+  const goals = JSON.parse(localStorage.getItem("goals")) || [];
+  const goal = {
+    id: Date.now(),
+    title: title.value,
+    target: Number(target.value),
+    saved: 0,
+    priority: priority.value,
+    status: "Active"
+  };
+  goals.push(goal);
+  localStorage.setItem("goals", JSON.stringify(goals));
+  showPopup("Goal created successfully");
+  location.href = "goals-list.html";
+}
+</script>
+
+</body>
+</html>

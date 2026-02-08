@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Goal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage();">
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Add Savings</h2>
+    <input id="amount" type="number" placeholder="Amount to add">
+    <button onclick="update()">Update</button>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function update() {
+  const id = sessionStorage.getItem("goalId");
+  const goals = JSON.parse(localStorage.getItem("goals")) || [];
+  const g = goals.find(x => x.id == id);
+
+  g.saved += Number(amount.value);
+  if (g.saved >= g.target) g.status = "Completed";
+
+  localStorage.setItem("goals", JSON.stringify(goals));
+  showPopup("Savings updated");
+  location.href = "goals-list.html";
+}
+</script>
+
+</body>
+</html>

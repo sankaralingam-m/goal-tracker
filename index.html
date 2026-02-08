@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Saving Goal Tracker – Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 id="title">Login</h2>
+
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="handle()">Continue</button>
+
+    <div class="switch" onclick="toggle()">
+      Don’t have an account? Sign Up
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+let mode = "login";
+
+function toggle() {
+  mode = mode === "login" ? "signup" : "login";
+  document.getElementById("title").innerText = mode === "login" ? "Login" : "Sign Up";
+  document.querySelector(".switch").innerText =
+    mode === "login" ? "Don’t have an account? Sign Up" : "Already have an account? Login";
+}
+
+function handle() {
+  const u = username.value.trim();
+  const p = password.value.trim();
+  if (!u || !p) return showPopup("All fields required", "error");
+
+  mode === "login" ? login(u, p) : signup(u, p);
+}
+</script>
+
+</body>
+</html>

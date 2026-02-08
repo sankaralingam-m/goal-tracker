@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Preferences</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage(); loadPref();">
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="../dashboard.html">Dashboard</a>
+    <a href="../goals/goals-list.html">Saving Goals</a>
+    <a href="../reports/daily-report.html">Reports</a>
+    <a href="../notifications/reminders.html">Notifications</a>
+    <a class="active">Profile</a>
+  </aside>
+
+  <main class="content">
+    <h2>Preferences</h2>
+
+    <div class="card">
+      <label>Currency</label>
+      <select id="currency">
+        <option value="INR">INR</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+
+      <label>Theme</label>
+      <select id="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <button onclick="savePref()">Save Preferences</button>
+    </div>
+  </main>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function loadPref() {
+  const p = JSON.parse(localStorage.getItem("profile")) || {};
+  currency.value = p.currency || "INR";
+  theme.value = p.theme || "light";
+}
+
+function savePref() {
+  const p = JSON.parse(localStorage.getItem("profile")) || {};
+  p.currency = currency.value;
+  p.theme = theme.value;
+  localStorage.setItem("profile", JSON.stringify(p));
+  showPopup("Preferences saved");
+}
+</script>
+
+</body>
+</html>

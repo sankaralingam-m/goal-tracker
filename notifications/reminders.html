@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reminders</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage(); loadReminder();">
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="../dashboard.html">Dashboard</a>
+    <a href="../goals/goals-list.html">Saving Goals</a>
+    <a href="../reports/daily-report.html">Reports</a>
+    <a class="active">Notifications</a>
+    <a href="../profile/view-profile.html">Profile</a>
+  </aside>
+
+  <main class="content">
+    <h2>Daily Saving Reminder</h2>
+
+    <div class="card">
+      <label>Reminder Time</label>
+      <input type="time" id="time">
+
+      <label>
+        <input type="checkbox" id="enabled">
+        Enable Reminder
+      </label>
+
+      <button onclick="saveReminder()">Save</button>
+    </div>
+  </main>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function loadReminder() {
+  const r = JSON.parse(localStorage.getItem("reminder")) || {};
+  time.value = r.time || "";
+  enabled.checked = r.enabled || false;
+}
+
+function saveReminder() {
+  localStorage.setItem("reminder", JSON.stringify({
+    time: time.value,
+    enabled: enabled.checked
+  }));
+  showPopup("Reminder saved");
+}
+</script>
+
+</body>
+</html>

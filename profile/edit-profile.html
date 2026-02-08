@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage(); loadData();">
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Edit Profile</h2>
+
+    <input id="name" placeholder="Full Name">
+    <input id="email" placeholder="Email Address">
+
+    <button onclick="save()">Save Changes</button>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function loadData() {
+  const p = JSON.parse(localStorage.getItem("profile")) || {};
+  name.value = p.name || "";
+  email.value = p.email || "";
+}
+
+function save() {
+  const profile = JSON.parse(localStorage.getItem("profile")) || {};
+  profile.name = name.value;
+  profile.email = email.value;
+  localStorage.setItem("profile", JSON.stringify(profile));
+  showPopup("Profile updated");
+  location.href = "view-profile.html";
+}
+</script>
+
+</body>
+</html>

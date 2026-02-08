@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Profile</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body onload="protectPage(); loadProfile();">
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="../dashboard.html">Dashboard</a>
+    <a href="../goals/goals-list.html">Saving Goals</a>
+    <a href="../reports/daily-report.html">Reports</a>
+    <a href="../notifications/reminders.html">Notifications</a>
+    <a class="active">Profile</a>
+  </aside>
+
+  <main class="content">
+    <h2>My Profile</h2>
+
+    <div class="card">
+      <p><strong>Name:</strong> <span id="name"></span></p>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Currency:</strong> <span id="currency"></span></p>
+
+      <button onclick="location.href='edit-profile.html'">
+        Edit Profile
+      </button>
+    </div>
+  </main>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function loadProfile() {
+  const p = JSON.parse(localStorage.getItem("profile")) || {};
+  name.innerText = p.name || "Not set";
+  email.innerText = p.email || "Not set";
+  currency.innerText = p.currency || "INR";
+}
+</script>
+
+</body>
+</html>
